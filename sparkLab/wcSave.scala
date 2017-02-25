@@ -14,12 +14,13 @@ val counts = textFile.flatMap(line => line.split(" ")).map(word => (word,1)).red
 counts.saveAsTextFile("hdfs://hadoop-master:9000/user/parallels/sparkLab/sparkout")
 
 /*
+*
 Useful command
 
 	
 	hdfs dfs -rm -r sparkLab/sparkout
 	hdfs dfs -ls sparkLab/sparkout
 	hdfs dfs -cat sparkLab/sparkout/part-00000	
-
+*
 */
 
