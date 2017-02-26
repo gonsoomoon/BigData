@@ -1,0 +1,128 @@
+/*
+	Author: Gon-soo Moon
+	Date: Feb 25, 2017
+	Title: Run sample Pi with executor parameters on Spark
+*/
+spark-submit --class org.apache.spark.examples.SparkPi --master yarn-client --num-executors 3 --driver-memory 512m --executor-memory 512m --executor-cores 2 spark-examples_2.11-2.0.1.jar 100
+
+
+/* Part of execution logs with --master yarn-client */
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Starting task 53.0 in stage 0.0 (TID 53, chanseo, partition 53, PROCESS_LOCAL, 5456 bytes)
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Finished task 46.0 in stage 0.0 (TID 46) in 243 ms on chansol (48/100)
+17/02/25 17:01:02 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Launching task 53 on executor id: 2 hostname: chanseo.
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Finished task 50.0 in stage 0.0 (TID 50) in 111 ms on chanseo (49/100)
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Starting task 54.0 in stage 0.0 (TID 54, chanseo, partition 54, PROCESS_LOCAL, 5456 bytes)
+17/02/25 17:01:02 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Launching task 54 on executor id: 2 hostname: chanseo.
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Starting task 55.0 in stage 0.0 (TID 55, chansol, partition 55, PROCESS_LOCAL, 5456 bytes)
+17/02/25 17:01:02 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Launching task 55 on executor id: 3 hostname: chansol.
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Starting task 56.0 in stage 0.0 (TID 56, chanseo, partition 56, PROCESS_LOCAL, 5456 bytes)
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Finished task 51.0 in stage 0.0 (TID 51) in 155 ms on chansol (50/100)
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Finished task 53.0 in stage 0.0 (TID 53) in 93 ms on chanseo (51/100)
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+17/02/25 17:01:02 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Launching task 56 on executor id: 2 hostname: chanseo.
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Starting task 57.0 in stage 0.0 (TID 57, chanseo, partition 57, PROCESS_LOCAL, 5456 bytes)
+17/02/25 17:01:02 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Launching task 57 on executor id: 2 hostname: chanseo.
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Finished task 54.0 in stage 0.0 (TID 54) in 116 ms on chanseo (52/100)
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Starting task 58.0 in stage 0.0 (TID 58, chansol, partition 58, PROCESS_LOCAL, 5456 bytes)
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+17/02/25 17:01:02 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Launching task 58 on executor id: 3 hostname: chansol.
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Finished task 52.0 in stage 0.0 (TID 52) in 199 ms on chansol (53/100)
+17/02/25 17:01:02 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Launching task 61 on executor id: 2 hostname: chanseo.
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+17/02/25 17:01:02 INFO scheduler.TaskSetManager: Finished task 58.0 in stage 0.0 (TID 58) in 56 ms on chansol (57/100)
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+/* Part of execution logs with --master yarn-cluster */
+
+spark-submit --class org.apache.spark.examples.SparkPi --master yarn-cluster --num-executors 3 --driver-memory 512m --executor-memory 512m --executor-cores 2 spark-examples_2.11-2.0.1.jar 100 
+
+
+
+
+parallels@> spark-submit --class org.apache.spark.examples.SparkPi --master yarn-cluster --num-executors 3 --driver-memory 512m --executor-memory 512m --executor-cores 2 spark-examples_2.11-2.0.1.jar 100 > result.txt
+Warning: Master yarn-cluster is deprecated since 2.0. Please use master "yarn" with specified deploy mode instead.
+17/02/25 17:49:28 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+17/02/25 17:49:29 INFO client.RMProxy: Connecting to ResourceManager at hadoop-master/10.211.55.11:8032
+17/02/25 17:49:29 INFO yarn.Client: Requesting a new application from cluster with 2 NodeManagers
+17/02/25 17:49:29 INFO yarn.Client: Verifying our application has not requested more than the maximum memory capability of the cluster (4096 MB per container)
+17/02/25 17:49:29 INFO yarn.Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+17/02/25 17:49:29 INFO yarn.Client: Setting up container launch context for our AM
+17/02/25 17:49:29 INFO yarn.Client: Setting up the launch environment for our AM container
+17/02/25 17:49:30 INFO yarn.Client: Preparing resources for our AM container
+17/02/25 17:49:30 WARN yarn.Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+17/02/25 17:49:32 INFO yarn.Client: Uploading resource file:/tmp/spark-f81d4e99-0992-487a-ba31-927f95a2bb07/__spark_libs__4839358414474949095.zip -> hdfs://hadoop-master:9000/user/parallels/.sparkStaging/application_1488056048183_0007/__spark_libs__4839358414474949095.zip
+17/02/25 17:49:34 INFO yarn.Client: Uploading resource file:/home/parallels/spark/spark-2.0.1-bin-hadoop2.7/examples/jars/spark-examples_2.11-2.0.1.jar -> hdfs://hadoop-master:9000/user/parallels/.sparkStaging/application_1488056048183_0007/spark-examples_2.11-2.0.1.jar
+17/02/25 17:49:35 INFO yarn.Client: Uploading resource file:/tmp/spark-f81d4e99-0992-487a-ba31-927f95a2bb07/__spark_conf__3350832760341037427.zip -> hdfs://hadoop-master:9000/user/parallels/.sparkStaging/application_1488056048183_0007/__spark_conf__.zip
+17/02/25 17:49:35 INFO spark.SecurityManager: Changing view acls to: parallels
+17/02/25 17:49:35 INFO spark.SecurityManager: Changing modify acls to: parallels
+17/02/25 17:49:35 INFO spark.SecurityManager: Changing view acls groups to: 
+17/02/25 17:49:35 INFO spark.SecurityManager: Changing modify acls groups to: 
+17/02/25 17:49:35 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(parallels); groups with view permissions: Set(); users  with modify permissions: Set(parallels); groups with modify permissions: Set()
+17/02/25 17:49:35 INFO yarn.Client: Submitting application application_1488056048183_0007 to ResourceManager
+17/02/25 17:49:35 INFO impl.YarnClientImpl: Submitted application application_1488056048183_0007
+17/02/25 17:49:36 INFO yarn.Client: Application report for application_1488056048183_0007 (state: ACCEPTED)
+17/02/25 17:49:36 INFO yarn.Client: 
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: N/A
+	 ApplicationMaster RPC port: -1
+	 queue: default
+	 start time: 1488066575197
+	 final status: UNDEFINED
+	 tracking URL: http://hadoop-master:8088/proxy/application_1488056048183_0007/
+	 user: parallels
+17/02/25 17:49:37 INFO yarn.Client: Application report for application_1488056048183_0007 (state: ACCEPTED)
+17/02/25 17:49:38 INFO yarn.Client: Application report for application_1488056048183_0007 (state: ACCEPTED)
+17/02/25 17:49:39 INFO yarn.Client: Application report for application_1488056048183_0007 (state: ACCEPTED)
+17/02/25 17:49:40 INFO yarn.Client: Application report for application_1488056048183_0007 (state: ACCEPTED)
+17/02/25 17:49:41 INFO yarn.Client: Application report for application_1488056048183_0007 (state: ACCEPTED)
+17/02/25 17:49:42 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:42 INFO yarn.Client: 
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: 10.211.55.7
+	 ApplicationMaster RPC port: 0
+	 queue: default
+	 start time: 1488066575197
+	 final status: UNDEFINED
+	 tracking URL: http://hadoop-master:8088/proxy/application_1488056048183_0007/
+	 user: parallels
+17/02/25 17:49:43 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:44 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:45 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:46 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:47 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:48 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:49 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:50 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:51 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:52 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:53 INFO yarn.Client: Application report for application_1488056048183_0007 (state: RUNNING)
+17/02/25 17:49:54 INFO yarn.Client: Application report for application_1488056048183_0007 (state: FINISHED)
+17/02/25 17:49:54 INFO yarn.Client: 
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: 10.211.55.7
+	 ApplicationMaster RPC port: 0
+	 queue: default
+	 start time: 1488066575197
+	 final status: SUCCEEDED
+	 tracking URL: http://hadoop-master:8088/proxy/application_1488056048183_0007/
+	 user: parallels
+17/02/25 17:49:54 INFO util.ShutdownHookManager: Shutdown hook called
+17/02/25 17:49:54 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-f81d4e99-0992-487a-ba31-927f95a2bb07
+parallels@> ====
